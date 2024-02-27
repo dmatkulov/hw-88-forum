@@ -5,7 +5,7 @@ import User from './User';
 const Schema = mongoose.Schema;
 
 const PostSchema = new mongoose.Schema<PostFields>({
-  userId: {
+  user: {
     type: Schema.Types.ObjectId,
     ref: 'User',
     required: true,

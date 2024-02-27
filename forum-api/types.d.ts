@@ -15,9 +15,15 @@ interface UserMethods {
 type UserModel = Model<UserFields, unknown, UserMethods>;
 
 export interface PostFields {
-  userId: Types.ObjectId;
+  user: Types.ObjectId;
   title: string;
   description: string | null;
   image: string | null;
   datetime: string;
+}
+
+export interface CommentFields {
+  user: Types.ObjectId;
+  post: Types.ObjectId;
+  text: string;
 }
