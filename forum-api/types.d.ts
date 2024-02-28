@@ -15,7 +15,7 @@ interface UserMethods {
 type UserModel = Model<UserFields, unknown, UserMethods>;
 
 export interface PostFields {
-  user: Types.ObjectId;
+  user: mongoose.Types.ObjectId;
   title: string;
   description: string | null;
   image: string | null;
@@ -23,7 +23,7 @@ export interface PostFields {
 }
 
 export interface CommentFields {
-  user: Types.ObjectId;
+  user: mongoose.Types.ObjectId;
   post: Types.ObjectId;
   text: string;
 }

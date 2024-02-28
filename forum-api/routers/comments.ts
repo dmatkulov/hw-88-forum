@@ -3,8 +3,30 @@ import auth, { RequestWithUser } from '../middleware/auth';
 import Post from '../models/Post';
 import { CommentFields } from '../types';
 import Comment from '../models/Comment';
+import { Types } from 'mongoose';
 
 const commentsRouter = Router();
+
+commentsRouter.get('/', async (req, res, next) => {
+  try {
+    const postId = req.body.post as string;
+
+    try {
+      new Types.ObjectId(postId);
+    } catch {
+      return res.status(404).send({ error: 'Wrong ObjectId!' });
+    }
+
+    const comments = await Comment.find({ post: postId }).populate(
+      'user',
+      '-_id username',
+    );
+
+    res.send(comments);
+  } catch (e) {
+    next(e);
+  }
+});
 commentsRouter.post('/', auth, async (req: RequestWithUser, res, next) => {
   try {
     const userId = req.user?._id;
@@ -39,3 +61,5 @@ commentsRouter.post('/', auth, async (req: RequestWithUser, res, next) => {
     next(e);
   }
 });
+
+export default commentsRouter;

@@ -4,7 +4,6 @@ import { PostFields } from '../types';
 import { imagesUpload } from '../multer';
 import Post from '../models/Post';
 import mongoose, { Types } from 'mongoose';
-import Comment from '../models/Comment';
 
 const postsRouter = Router();
 
@@ -12,17 +11,10 @@ postsRouter.get('/', async (req, res, next) => {
   try {
     const posts = await Post.find()
       .sort({ datetime: -1 })
-      .populate('user', 'username');
+      .populate('user', '-_id username')
+      .select('-description');
 
-    const result = posts.map((post) => ({
-      _id: post._id,
-      user: post.user,
-      title: post.title,
-      image: post.image ? post.image : null,
-      datetime: post.datetime,
-    }));
-
-    return res.send(result);
+    return res.send(posts);
   } catch (e) {
     next(e);
   }
@@ -37,23 +29,13 @@ postsRouter.get('/:id', async (req, res, next) => {
       return res.status(404).send({ error: 'Wrong ObjectId!' });
     }
 
-    const post = await Post.findById(_id).populate('user', 'username');
+    const post = await Post.findById(_id).populate('user', '-_id username');
 
     if (!post) {
       return res.status(404).send({ error: 'Post does not exist!' });
     }
 
-    const comments = await Comment.find({ post: post._id }).populate(
-      'user',
-      'username',
-    );
-
-    const result = {
-      post,
-      comments,
-    };
-
-    res.send(result);
+    res.send(post);
   } catch (e) {
     next(e);
   }
