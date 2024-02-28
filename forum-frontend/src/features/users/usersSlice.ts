@@ -34,6 +34,12 @@ export const usersSlice = createSlice({
     unsetUser: (state) => {
       state.user = null;
     },
+    resetMessages: (state) => {
+      state.registerError = null;
+      state.registerMessage = null;
+      state.loginError = null;
+      state.loginMessage = null;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -81,7 +87,7 @@ export const usersSlice = createSlice({
 });
 
 export const usersReducer = usersSlice.reducer;
-export const { unsetUser } = usersSlice.actions;
+export const { unsetUser, resetMessages } = usersSlice.actions;
 export const selectUser = (state: RootState) => state.users.user;
 export const selectRegisterMessage = (state: RootState) =>
   state.users.registerMessage;
