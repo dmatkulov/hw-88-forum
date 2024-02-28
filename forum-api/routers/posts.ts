@@ -29,7 +29,7 @@ postsRouter.get('/:id', async (req, res, next) => {
       return res.status(404).send({ error: 'Wrong ObjectId!' });
     }
 
-    const post = await Post.findById(_id).populate('user', '-_id username');
+    const post = await Post.findById(_id).populate('user', '_id username');
 
     if (!post) {
       return res.status(404).send({ error: 'Post does not exist!' });

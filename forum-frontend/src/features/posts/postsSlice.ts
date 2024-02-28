@@ -1,16 +1,20 @@
-import { Post } from '../../types';
+import { Post, PostApi } from '../../types';
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchPosts } from './postsThunks';
+import { fetchPosts, fetchSinglePost } from './postsThunks';
 import { RootState } from '../../app/store';
 
 interface PostsState {
   items: Post[];
+  item: PostApi | null;
   fetchLoading: boolean;
+  fetchOneLoading: boolean;
 }
 
 const initialState: PostsState = {
   items: [],
+  item: null,
   fetchLoading: false,
+  fetchOneLoading: false,
 };
 
 export const postsSlice = createSlice({
@@ -29,11 +33,26 @@ export const postsSlice = createSlice({
       .addCase(fetchPosts.rejected, (state) => {
         state.fetchLoading = false;
       });
+
+    builder
+      .addCase(fetchSinglePost.pending, (state) => {
+        state.fetchOneLoading = true;
+      })
+      .addCase(fetchSinglePost.fulfilled, (state, { payload: post }) => {
+        state.fetchOneLoading = false;
+        state.item = post;
+      })
+      .addCase(fetchSinglePost.rejected, (state) => {
+        state.fetchOneLoading = true;
+      });
   },
 });
 
 export const postsReducer = postsSlice.reducer;
 
 export const selectPosts = (state: RootState) => state.posts.items;
+export const selectPost = (state: RootState) => state.posts.item;
 export const selectPostsLoading = (state: RootState) =>
   state.posts.fetchLoading;
+export const selectOnePostLoading = (state: RootState) =>
+  state.posts.fetchOneLoading;

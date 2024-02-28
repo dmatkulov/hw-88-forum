@@ -25,6 +25,9 @@ const AppToolbar: React.FC = () => {
         backgroundColor: 'white',
         boxShadow: 0,
         mb: '80px',
+        top: 0,
+        left: 0,
+        right: 0,
       }}
     >
       <Toolbar disableGutters>

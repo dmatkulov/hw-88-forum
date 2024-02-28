@@ -19,6 +19,10 @@ export interface Post {
   datetime: string;
 }
 
+export interface PostApi extends Post {
+  description: string | null;
+}
+
 //mutation
 export interface RegisterMutation {
   username: string;

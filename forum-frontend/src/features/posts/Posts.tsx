@@ -4,7 +4,7 @@ import { selectPosts, selectPostsLoading } from './postsSlice';
 import { fetchPosts } from './postsThunks';
 import LoadingPage from '../../components/IU/LoadingPage/LoadingPage';
 import PostItem from '../components/PostItem';
-import { Grid, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 
 const Posts: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -18,7 +18,7 @@ const Posts: React.FC = () => {
   return (
     <>
       {loading && <LoadingPage />}
-      <Grid container direction="column" spacing={2}>
+      <Box>
         <Typography
           variant="h4"
           component="h1"
@@ -33,7 +33,7 @@ const Posts: React.FC = () => {
         </Typography>
         {posts.length > 0 &&
           posts.map((post) => <PostItem key={post._id} post={post} />)}
-      </Grid>
+      </Box>
     </>
   );
 };

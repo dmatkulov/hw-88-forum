@@ -9,7 +9,7 @@ const commentsRouter = Router();
 
 commentsRouter.get('/', async (req, res, next) => {
   try {
-    const postId = req.body.post as string;
+    const postId = req.query.post as string;
 
     try {
       new Types.ObjectId(postId);

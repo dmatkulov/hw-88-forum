@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container } from '@mui/material';
+import { Box, Container } from '@mui/material';
 import AppToolbar from '../AppToolbar/AppToolbar';
 
 const Layout: React.FC<React.PropsWithChildren> = ({ children }) => {
@@ -10,15 +10,14 @@ const Layout: React.FC<React.PropsWithChildren> = ({ children }) => {
         borderLeft: '1px solid #eee',
         borderRight: '1px solid #eee',
         height: '100vh',
+        position: 'relative',
       }}
     >
       <header>
         <AppToolbar />
       </header>
       <main>
-        <Container maxWidth="md" disableGutters sx={{ pl: '16px' }}>
-          {children}
-        </Container>
+        <Box component="section">{children}</Box>
       </main>
     </Container>
   );
