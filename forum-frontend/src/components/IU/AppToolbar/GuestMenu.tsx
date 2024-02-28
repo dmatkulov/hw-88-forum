@@ -8,7 +8,7 @@ const GuestMenu: React.FC = () => {
       <Button
         component={NavLink}
         to="/register"
-        sx={{ textTransform: 'none' }}
+        sx={{ textTransform: 'none', borderRadius: 16 }}
         color={'secondary'}
       >
         Sign Up
@@ -18,7 +18,7 @@ const GuestMenu: React.FC = () => {
         component={NavLink}
         to="/login"
         color={'secondary'}
-        sx={{ textTransform: 'none', color: 'white' }}
+        sx={{ textTransform: 'none', color: 'white', borderRadius: 16 }}
         disableElevation
       >
         Sign In

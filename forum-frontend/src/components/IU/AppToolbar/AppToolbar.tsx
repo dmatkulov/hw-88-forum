@@ -24,17 +24,18 @@ const AppToolbar: React.FC = () => {
       sx={{
         backgroundColor: 'white',
         boxShadow: 0,
-        mb: 4,
+        mb: '80px',
       }}
     >
-      <Toolbar>
+      <Toolbar disableGutters>
         <Grid
           container
           justifyContent="space-between"
           alignItems="center"
-          sx={{ borderBottom: '1px solid #eee' }}
-          py={2}
-          mt={2}
+          sx={{
+            borderBottom: '1px solid #eee',
+            py: 2,
+          }}
         >
           <Typography
             variant="h6"

@@ -1,15 +1,8 @@
 import React, { useState } from 'react';
-import {
-  IconButton,
-  Menu,
-  MenuItem,
-  Stack,
-  Tooltip,
-  Typography,
-} from '@mui/material';
+import { IconButton, Menu, MenuItem, Stack, Tooltip } from '@mui/material';
 import { User } from '../../../types';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../../app/hooks';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { logOutUser } from '../../../features/users/usersThunks';
@@ -40,17 +33,7 @@ const UserMenu: React.FC<Props> = ({ user }) => {
         spacing={5}
         alignItems="center"
         justifyContent="center"
-      >
-        <Typography
-          variant="body1"
-          component={NavLink}
-          to="/trackshistory"
-          color="inherit"
-          sx={{ textDecoration: 'none' }}
-        >
-          Recently played
-        </Typography>
-      </Stack>
+      ></Stack>
       <IconButton
         color="inherit"
         onClick={handleClick}

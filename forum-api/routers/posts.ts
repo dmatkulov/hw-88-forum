@@ -11,7 +11,7 @@ postsRouter.get('/', async (req, res, next) => {
   try {
     const posts = await Post.find()
       .sort({ datetime: -1 })
-      .populate('user', '-_id username')
+      .populate('user', 'username')
       .select('-description');
 
     return res.send(posts);

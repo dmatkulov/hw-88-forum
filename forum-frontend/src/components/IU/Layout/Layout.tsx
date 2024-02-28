@@ -1,11 +1,11 @@
 import React from 'react';
-import { Container, Grid } from '@mui/material';
+import { Container } from '@mui/material';
 import AppToolbar from '../AppToolbar/AppToolbar';
 
 const Layout: React.FC<React.PropsWithChildren> = ({ children }) => {
   return (
     <Container
-      maxWidth="lg"
+      maxWidth="md"
       sx={{
         borderLeft: '1px solid #eee',
         borderRight: '1px solid #eee',
@@ -16,7 +16,9 @@ const Layout: React.FC<React.PropsWithChildren> = ({ children }) => {
         <AppToolbar />
       </header>
       <main>
-        <Grid container>{children}</Grid>
+        <Container maxWidth="md" disableGutters sx={{ pl: '16px' }}>
+          {children}
+        </Container>
       </main>
     </Container>
   );

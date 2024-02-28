@@ -8,6 +8,17 @@ export interface LogOutMessage {
   message: string;
 }
 
+export interface Post {
+  _id: string;
+  user: {
+    _id: string;
+    username: string;
+  };
+  title: string;
+  image: string | null;
+  datetime: string;
+}
+
 //mutation
 export interface RegisterMutation {
   username: string;
