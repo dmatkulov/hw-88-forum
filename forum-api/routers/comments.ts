@@ -19,7 +19,7 @@ commentsRouter.get('/', async (req, res, next) => {
 
     const comments = await Comment.find({ post: postId }).populate(
       'user',
-      '-_id username',
+      '_id username',
     );
 
     res.send(comments);

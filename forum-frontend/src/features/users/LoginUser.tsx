@@ -38,6 +38,7 @@ const Login: React.FC = () => {
   useEffect(() => {
     dispatch(resetMessages());
   }, [dispatch]);
+
   const inputChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setState((prevState) => {

@@ -1,7 +1,7 @@
 import React from 'react';
-import { Avatar, Box, Grid, Typography } from '@mui/material';
-import { PostApi } from '../../types';
-import { apiURL } from '../../constants';
+import { Avatar, Box, Typography } from '@mui/material';
+import { PostApi } from '../../../types';
+import { apiURL } from '../../../constants';
 import dayjs from 'dayjs';
 
 interface Props {
@@ -15,7 +15,9 @@ const PostArticle: React.FC<Props> = ({ post }) => {
   return (
     <>
       <Box sx={{ display: 'flex', alignItems: 'center', mb: 4 }}>
-        <Avatar sx={{ width: 28, height: 28, mr: 1 }}>1</Avatar>
+        <Avatar sx={{ width: 28, height: 28, mr: 1 }}>
+          {post.user.username.charAt(0)}
+        </Avatar>
         <Box
           sx={{
             display: 'flex',
@@ -47,9 +49,17 @@ const PostArticle: React.FC<Props> = ({ post }) => {
         </Box>
       )}
       {post.image && (
-        <Grid item xs={12}>
-          <img src={postImage} alt={post.title} style={{ width: '100%' }} />
-        </Grid>
+        <Box sx={{ height: '450px', overflow: 'hidden', borderRadius: '12px' }}>
+          <img
+            src={postImage}
+            alt={post.title}
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+            }}
+          />
+        </Box>
       )}
     </>
   );

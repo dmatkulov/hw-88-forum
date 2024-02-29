@@ -1,7 +1,7 @@
 import React from 'react';
 import { Avatar, CardMedia, Grid, Stack, Typography } from '@mui/material';
-import { Post } from '../../types';
-import { apiURL } from '../../constants';
+import { Post } from '../../../types';
+import { apiURL } from '../../../constants';
 import PostBadge from './PostBadge';
 import { useNavigate } from 'react-router-dom';
 import dayjs from 'dayjs';

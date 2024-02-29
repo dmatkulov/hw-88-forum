@@ -47,7 +47,7 @@ const run = async () => {
     },
   );
 
-  const [post1, post2] = await Post.create(
+  const [post1, post2, post3] = await Post.create(
     {
       user: user1,
       title: 'New photos of the $80 million Mars Ingenuity helicopter',
@@ -58,11 +58,19 @@ const run = async () => {
     },
     {
       user: user2,
-      title:
-        'Central Asia was a very good place before Turco mongol barbarians ruined it',
+      title: 'Central Asia was a very good place before barbarians ruined it',
       description:
         'Did you know that the first ever type of state sponsored schools were designed and built in central Asia by a central asian? Nizam ul mulk an Iranian vizier during Seljuk empire designed something called the madresah which was a place to learn science language İslam and poetry for kids. ',
       image: 'fixtures/CA.webp',
+      datetime: new Date().toISOString(),
+    },
+    {
+      user: user2,
+      title:
+        'Graphic Design\n' +
+        'A collaborative learning community for graphic designers at any stage',
+      description:
+        "I walk past this billboard near my flat, pretty much everyday. For my small a** town, it's nice to see this slim bezel digital billboard (especially with trees behind, I'll be sharing more pics) When the ad is good or done well, I stop and look for minutes at a time 🤩 ",
       datetime: new Date().toISOString(),
     },
   );

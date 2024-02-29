@@ -10,6 +10,7 @@ import {
 } from 'redux-persist';
 import { PURGE, REGISTER, REHYDRATE } from 'redux-persist/es/constants';
 import { postsReducer } from '../features/posts/postsSlice';
+import { commentsReducer } from '../features/comments/commentsSlice';
 
 const usersPersistConfig = {
   key: 'forum:users',
@@ -20,6 +21,7 @@ const usersPersistConfig = {
 const rootReducer = combineReducers({
   users: persistReducer(usersPersistConfig, usersReducer),
   posts: postsReducer,
+  comments: commentsReducer,
 });
 
 export const store = configureStore({

@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { selectPosts, selectPostsLoading } from './postsSlice';
-import { fetchPosts } from './postsThunks';
-import LoadingPage from '../../components/IU/LoadingPage/LoadingPage';
-import PostItem from '../components/PostItem';
+import { useAppDispatch, useAppSelector } from '../../../app/hooks';
+import { selectPosts, selectPostsLoading } from '../postsSlice';
+import { fetchPosts } from '../postsThunks';
+import LoadingPage from '../../../components/IU/LoadingPage/LoadingPage';
+import PostItem from './PostItem';
 import { Box, Typography } from '@mui/material';
 
-const Posts: React.FC = () => {
+const AllPosts: React.FC = () => {
   const dispatch = useAppDispatch();
   const posts = useAppSelector(selectPosts);
   const loading = useAppSelector(selectPostsLoading);
@@ -38,4 +38,4 @@ const Posts: React.FC = () => {
   );
 };
 
-export default Posts;
+export default AllPosts;

@@ -25,9 +25,8 @@ const AppToolbar: React.FC = () => {
         backgroundColor: 'white',
         boxShadow: 0,
         mb: '80px',
-        top: 0,
-        left: 0,
-        right: 0,
+        minHeight: '74px',
+        borderTop: '8px solid coral',
       }}
     >
       <Toolbar disableGutters>
@@ -38,6 +37,7 @@ const AppToolbar: React.FC = () => {
           sx={{
             borderBottom: '1px solid #eee',
             py: 2,
+            px: 3,
           }}
         >
           <Typography

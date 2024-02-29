@@ -23,6 +23,23 @@ export interface PostApi extends Post {
   description: string | null;
 }
 
+export interface Comment {
+  _id: string;
+  user: {
+    _id: string;
+    username: string;
+  };
+  post: string;
+  text: string;
+}
+
+export interface CommentMutation {
+  post: string;
+  text: string;
+}
+
+export type CommentBody = Omit<CommentMutation, 'post'>;
+
 //mutation
 export interface RegisterMutation {
   username: string;
@@ -34,7 +51,7 @@ export interface LoginMutation {
   password: string;
 }
 
-//response
+//error
 
 export interface RegisterResponse {
   message: string;
