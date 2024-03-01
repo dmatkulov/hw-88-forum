@@ -1,5 +1,6 @@
 import Layout from './components/IU/Layout/Layout';
 import { Route, Routes } from 'react-router-dom';
+
 import AllPosts from './features/posts/AllPosts';
 import RegisterUser from './features/users/RegisterUser';
 import LoginUser from './features/users/LoginUser';

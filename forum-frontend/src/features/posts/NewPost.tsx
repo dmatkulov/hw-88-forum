@@ -1,9 +1,11 @@
 import React from 'react';
-import { Box, Typography } from '@mui/material';
-import PostForm from './components/PostForm';
+
 import { useAppSelector } from '../../app/hooks';
-import { selectUser } from '../users/usersSlice';
 import { Navigate } from 'react-router-dom';
+import { Box, Typography } from '@mui/material';
+
+import PostForm from './components/PostForm';
+import { selectUser } from '../users/usersSlice';
 
 const NewPost: React.FC = () => {
   const user = useAppSelector(selectUser);

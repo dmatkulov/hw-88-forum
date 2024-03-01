@@ -1,18 +1,21 @@
 import React, { useCallback, useEffect } from 'react';
-import PostArticle from './components/PostArticle';
 import { Box, Typography } from '@mui/material';
 import { useParams } from 'react-router-dom';
+
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { selectOnePostLoading, selectPost } from './postsSlice';
-import { fetchSinglePost } from './postsThunks';
-import LoadingPage from '../../components/IU/LoadingPage/LoadingPage';
-import { fetchComments, submitComment } from '../comments/commentsThunks';
-import { selectUser } from '../users/usersSlice';
-import CommentForm from '../comments/components/CommentForm';
-import { CommentBody, CommentMutation } from '../../types';
 import { selectComments } from '../comments/commentsSlice';
+import { selectUser } from '../users/usersSlice';
+import { fetchComments, submitComment } from '../comments/commentsThunks';
+import { fetchSinglePost } from './postsThunks';
+
+import PostArticle from './components/PostArticle';
+import LoadingPage from '../../components/IU/LoadingPage/LoadingPage';
+import CommentForm from '../comments/components/CommentForm';
 import CommentItem from '../comments/components/CommentItem';
 import InfoAlert from '../../components/IU/Alerts/InfoAlert';
+
+import { CommentBody, CommentMutation } from '../../types';
 
 const FullPost: React.FC = () => {
   const { id } = useParams() as { id: string };

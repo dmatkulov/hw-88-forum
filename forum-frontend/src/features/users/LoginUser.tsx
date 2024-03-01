@@ -22,7 +22,6 @@ import { LoadingButton } from '@mui/lab';
 import { loginUser } from './usersThunks';
 import ErrorAlert from '../../components/IU/Alerts/ErrorAlert';
 import SuccessAlert from '../../components/IU/Alerts/SuccessAlert';
-import SuccessFormItem from '../../components/IU/FormItem/SuccessFormItem';
 
 const Login: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -57,12 +56,7 @@ const Login: React.FC = () => {
   if (loginMessage) {
     formField = (
       <Grid container justifyContent="center" direction="column" gap={2}>
-        <Grid item>
-          <SuccessAlert message={loginMessage} />
-        </Grid>
-        <Grid item textAlign="center">
-          <SuccessFormItem />
-        </Grid>
+        <SuccessAlert message={loginMessage} />
       </Grid>
     );
   } else {
@@ -131,7 +125,6 @@ const Login: React.FC = () => {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-
         {error && <ErrorAlert message={error.error} />}
 
         {formField}

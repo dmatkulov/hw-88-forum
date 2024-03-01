@@ -9,7 +9,6 @@ export const fetchPosts = createAsyncThunk<Post[]>(
   'posts/fetchAll',
   async () => {
     const response = await axiosApi.get<Post[]>(routes.posts);
-
     return response.data ?? [];
   },
 );

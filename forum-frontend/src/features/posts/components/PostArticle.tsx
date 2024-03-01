@@ -1,11 +1,12 @@
 import React from 'react';
-import { Avatar, Box, Typography } from '@mui/material';
-import { PostApi } from '../../../types';
-import { apiURL } from '../../../constants';
 import dayjs from 'dayjs';
-import PostBadge from './PostBadge';
+import { Avatar, Box, Typography } from '@mui/material';
 import { useAppSelector } from '../../../app/hooks';
 import { selectCommentCount } from '../../comments/commentsSlice';
+
+import { PostApi } from '../../../types';
+import { apiURL } from '../../../constants';
+import PostBadge from './PostBadge';
 
 interface Props {
   post: PostApi;

@@ -21,7 +21,6 @@ import { RegisterMutation } from '../../types';
 import { registerUser } from './usersThunks';
 import { LoadingButton } from '@mui/lab';
 import SuccessAlert from '../../components/IU/Alerts/SuccessAlert';
-import SuccessFormItem from '../../components/IU/FormItem/SuccessFormItem';
 
 const RegisterUser: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -69,12 +68,7 @@ const RegisterUser: React.FC = () => {
   if (registerMessage) {
     formField = (
       <Grid container justifyContent="center" direction="column" gap={2}>
-        <Grid item>
-          <SuccessAlert message={registerMessage} />
-        </Grid>
-        <Grid item textAlign="center">
-          <SuccessFormItem />
-        </Grid>
+        <SuccessAlert message={registerMessage} />
       </Grid>
     );
   } else {
