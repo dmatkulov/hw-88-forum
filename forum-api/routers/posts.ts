@@ -1,15 +1,16 @@
+import mongoose, { Types } from 'mongoose';
 import { Router } from 'express';
 import auth, { RequestWithUser } from '../middleware/auth';
-import { PostFields } from '../types';
 import { imagesUpload } from '../multer';
+
+import { PostFields } from '../types';
 import Post from '../models/Post';
-import mongoose, { Types } from 'mongoose';
 
 const postsRouter = Router();
 
 postsRouter.get('/', async (_req, res, next) => {
   try {
-    const posts = await Post.find({}, { description: false })
+    const posts = await Post.find({}, { description: 0 })
       .sort({ datetime: -1 })
       .populate('user', 'username');
 

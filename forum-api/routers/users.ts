@@ -1,5 +1,6 @@
 import express from 'express';
 import mongoose from 'mongoose';
+
 import User from '../models/User';
 
 const userRouter = express.Router();
@@ -38,14 +39,14 @@ userRouter.post('/sessions', async (req, res, next) => {
 
     if (!isMatch) {
       return res.status(422).send({
-        error: 'Invalid credentials: username or password is incorrect!',
+        error: 'Invalid credentials',
       });
     }
 
     user.generateToken();
     await user.save();
 
-    return res.send({ message: `Welcome back, ${user.username}`, user });
+    return res.send({ message: `Welcome back, ${user.username}!`, user });
   } catch (e) {
     next(e);
   }

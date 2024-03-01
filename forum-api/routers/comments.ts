@@ -1,8 +1,10 @@
 import { Router } from 'express';
+
 import auth, { RequestWithUser } from '../middleware/auth';
 import Post from '../models/Post';
-import { CommentFields, CommentResponse } from '../types';
 import Comment from '../models/Comment';
+
+import { CommentFields, CommentResponse } from '../types';
 import { Types } from 'mongoose';
 
 const commentsRouter = Router();
