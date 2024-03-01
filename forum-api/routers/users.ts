@@ -13,16 +13,16 @@ userRouter.post('/', async (req, res, next) => {
 
     user.generateToken();
     await user.save();
-
     return res.send({
-      message: 'You have been successfully registered',
+      message: 'You have been successfully registered!',
       user,
     });
-  } catch (e) {
-    if (e instanceof mongoose.Error.ValidationError) {
-      return res.status(422).send(e);
+  } catch (error) {
+    if (error instanceof mongoose.Error.ValidationError) {
+      return res.status(422).send(error);
     }
-    next(e);
+
+    next(error);
   }
 });
 

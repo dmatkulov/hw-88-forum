@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import auth, { RequestWithUser } from '../middleware/auth';
 import Post from '../models/Post';
-import { CommentFields } from '../types';
+import { CommentFields, CommentResponse } from '../types';
 import Comment from '../models/Comment';
 import { Types } from 'mongoose';
 
@@ -17,12 +17,13 @@ commentsRouter.get('/', async (req, res, next) => {
       return res.status(404).send({ error: 'Wrong ObjectId!' });
     }
 
-    const comments = await Comment.find({ post: postId }).populate(
-      'user',
-      '_id username',
-    );
+    const comments = await Comment.find<CommentResponse[]>({
+      post: postId,
+    })
+      .populate('user', '_id username')
+      .sort({ _id: -1 });
 
-    res.send(comments);
+    res.send({ comments: comments, count: comments.length });
   } catch (e) {
     next(e);
   }

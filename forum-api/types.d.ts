@@ -27,3 +27,13 @@ export interface CommentFields {
   post: Types.ObjectId;
   text: string;
 }
+
+export interface CommentResponse {
+  _id: string;
+  user: {
+    _id: string;
+    username: string;
+  };
+  post: string;
+  text: string;
+}

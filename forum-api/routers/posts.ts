@@ -7,12 +7,11 @@ import mongoose, { Types } from 'mongoose';
 
 const postsRouter = Router();
 
-postsRouter.get('/', async (req, res, next) => {
+postsRouter.get('/', async (_req, res, next) => {
   try {
-    const posts = await Post.find()
+    const posts = await Post.find({}, { description: false })
       .sort({ datetime: -1 })
-      .populate('user', 'username')
-      .select('-description');
+      .populate('user', 'username');
 
     return res.send(posts);
   } catch (e) {
@@ -47,14 +46,9 @@ postsRouter.post(
   async (req: RequestWithUser, res, next) => {
     try {
       const userId = req.user?._id;
+      const title = req.body.title;
       const description = req.body.description ? req.body.description : null;
       const image = req.file ? req.file.filename : null;
-
-      if (!description && !image) {
-        return res
-          .status(422)
-          .send({ error: 'Description or image must be present' });
-      }
 
       if (!userId) {
         return res.status(422).send({ error: 'User ID is undefined!' });
@@ -62,7 +56,7 @@ postsRouter.post(
 
       const postData: PostFields = {
         user: userId,
-        title: req.body.title,
+        title,
         description,
         image,
         datetime: new Date().toISOString(),

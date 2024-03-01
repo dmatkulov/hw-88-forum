@@ -1,4 +1,4 @@
-import mongoose, { Types } from 'mongoose';
+import mongoose, { HydratedDocument, Types } from 'mongoose';
 import { PostFields } from '../types';
 import User from './User';
 
@@ -19,10 +19,26 @@ const PostSchema = new mongoose.Schema<PostFields>({
   },
   title: {
     type: String,
-    required: true,
+    required: [true, 'Title must be present'],
   },
-  description: String,
-  image: String,
+  description: {
+    type: String,
+    validate: {
+      validator: function (this: HydratedDocument<PostFields>) {
+        return this.description || this.image;
+      },
+      message: 'Description or image must be present',
+    },
+  },
+  image: {
+    type: String,
+    validate: {
+      validator: function (this: HydratedDocument<PostFields>) {
+        return this.description || this.image;
+      },
+      message: 'Image or description must be present',
+    },
+  },
   datetime: Date,
 });
 
