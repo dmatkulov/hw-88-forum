@@ -1,11 +1,21 @@
 import React, { useState } from 'react';
-import { IconButton, Menu, MenuItem, Stack, Tooltip } from '@mui/material';
+import {
+  Button,
+  IconButton,
+  Menu,
+  MenuItem,
+  Stack,
+  Tooltip,
+} from '@mui/material';
 import { User } from '../../../types';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { useNavigate } from 'react-router-dom';
-import { useAppDispatch } from '../../../app/hooks';
+import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { logOutUser } from '../../../features/users/usersThunks';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+import { selectLogOutLoading } from '../../../features/users/usersSlice';
+import LoadingPage from '../LoadingPage/LoadingPage';
 
 interface Props {
   user: User;
@@ -15,6 +25,7 @@ const UserMenu: React.FC<Props> = ({ user }) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
+  const logOutLoading = useAppSelector(selectLogOutLoading);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -27,13 +38,26 @@ const UserMenu: React.FC<Props> = ({ user }) => {
 
   return (
     <>
+      {logOutLoading && <LoadingPage />}
       <Stack
         sx={{ flexGrow: 1 }}
         direction="row"
         spacing={5}
         alignItems="center"
         justifyContent="center"
-      ></Stack>
+      >
+        <Button
+          color={'secondary'}
+          sx={{ textTransform: 'none', color: 'white', borderRadius: 16 }}
+          variant="contained"
+          startIcon={<AddCircleIcon />}
+          disableElevation
+          onClick={() => navigate('/new-post')}
+        >
+          Create post
+        </Button>
+      </Stack>
+
       <IconButton
         color="inherit"
         onClick={handleClick}

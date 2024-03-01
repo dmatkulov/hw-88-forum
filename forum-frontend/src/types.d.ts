@@ -33,6 +33,12 @@ export interface Comment {
   text: string;
 }
 
+export interface CommentsResponse {
+  comments: Comment[];
+  count: number;
+}
+
+//mutation
 export interface CommentMutation {
   post: string;
   text: string;
@@ -40,7 +46,6 @@ export interface CommentMutation {
 
 export type CommentBody = Omit<CommentMutation, 'post'>;
 
-//mutation
 export interface RegisterMutation {
   username: string;
   password: string;
@@ -49,6 +54,12 @@ export interface RegisterMutation {
 export interface LoginMutation {
   username: string;
   password: string;
+}
+
+export interface PostMutation {
+  title: string;
+  description: string;
+  image: File | null;
 }
 
 //error

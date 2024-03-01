@@ -1,18 +1,17 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axiosApi from '../../axiosApi';
 import { routes } from '../../constants';
-import { Comment, CommentMutation, GlobalError } from '../../types';
+import { CommentMutation, CommentsResponse, GlobalError } from '../../types';
 import { RootState } from '../../app/store';
 import { isAxiosError } from 'axios';
 
-export const fetchComments = createAsyncThunk<Comment[], string>(
+export const fetchComments = createAsyncThunk<CommentsResponse, string>(
   'comments/fetchByPost',
   async (postId) => {
-    const response = await axiosApi.get<Comment[]>(
+    const response = await axiosApi.get<CommentsResponse>(
       routes.comments + '?post=' + postId,
     );
-
-    return response.data.reverse() ?? [];
+    return response.data;
   },
 );
 

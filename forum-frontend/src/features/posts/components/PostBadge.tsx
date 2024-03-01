@@ -10,7 +10,12 @@ const PostBadge: React.FC = () => {
       spacing={1}
       px={1}
       py={0.4}
-      sx={{ bgcolor: 'coral', borderRadius: 4, color: 'white' }}
+      sx={{
+        bgcolor: 'coral',
+        borderRadius: 4,
+        color: 'white',
+        display: 'inline-flex',
+      }}
     >
       <ForumIcon fontSize="small" color="inherit" />{' '}
       <Typography variant="body2" fontSize="small">

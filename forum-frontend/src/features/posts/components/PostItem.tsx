@@ -52,7 +52,7 @@ const PostItem: React.FC<Props> = ({ post }) => {
               {post.user.username}
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              {date}
+              on {date}
             </Typography>
           </Stack>
           {!post.image && (

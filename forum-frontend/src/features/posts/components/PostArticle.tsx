@@ -3,6 +3,9 @@ import { Avatar, Box, Typography } from '@mui/material';
 import { PostApi } from '../../../types';
 import { apiURL } from '../../../constants';
 import dayjs from 'dayjs';
+import PostBadge from './PostBadge';
+import { useAppSelector } from '../../../app/hooks';
+import { selectCommentCount } from '../../comments/commentsSlice';
 
 interface Props {
   post: PostApi;
@@ -11,6 +14,7 @@ interface Props {
 const PostArticle: React.FC<Props> = ({ post }) => {
   const postImage = apiURL + '/' + post.image;
   const date = dayjs(post.datetime).format('dddd, HH:mm:ss');
+  const count = useAppSelector(selectCommentCount);
 
   return (
     <>
@@ -38,9 +42,23 @@ const PostArticle: React.FC<Props> = ({ post }) => {
           </Typography>
         </Box>
       </Box>
-      <Typography variant="h4" component="h1" gutterBottom mb={6}>
+      {!post.image && <PostBadge />}
+      <Typography variant="h4" component="h1" gutterBottom mb={6} mt={3}>
         {post.title}
       </Typography>
+
+      <Typography
+        color="gray"
+        fontSize="small"
+        bgcolor="#eeeeee"
+        display="inline-block"
+        px={2}
+        borderRadius={3}
+        mb={3}
+      >
+        {count > 0 ? `${count} comment(s)` : 'No comments'}
+      </Typography>
+
       {post.description && (
         <Box>
           <Typography variant="body1" gutterBottom mb={4}>

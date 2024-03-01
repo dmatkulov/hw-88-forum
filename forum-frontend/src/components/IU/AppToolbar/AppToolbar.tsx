@@ -40,12 +40,7 @@ const AppToolbar: React.FC = () => {
             px: 3,
           }}
         >
-          <Typography
-            variant="h6"
-            component="div"
-            sx={{ flexGrow: 1 }}
-            color="black"
-          >
+          <Typography variant="h6" component="div" color="black">
             <Link to="/">TalkSpace</Link>
           </Typography>
           {user ? <UserMenu user={user} /> : <GuestMenu />}

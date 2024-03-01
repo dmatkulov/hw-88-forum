@@ -17,9 +17,9 @@ export const registerUser = createAsyncThunk<
   RegisterResponse,
   RegisterMutation,
   { rejectValue: ValidationError }
->('users/register', async (user: RegisterMutation, { rejectWithValue }) => {
+>('users/register', async (registerMutation, { rejectWithValue }) => {
   try {
-    const response = await axiosApi.post(routes.register, user);
+    const response = await axiosApi.post(routes.register, registerMutation);
     return response.data;
   } catch (e) {
     if (isAxiosError(e) && e.response && e.response.status === 422) {
@@ -51,14 +51,13 @@ export const loginUser = createAsyncThunk<
 });
 
 export const logOutUser = createAsyncThunk<
-  LogOutMessage,
+  void,
   undefined,
   { state: RootState }
 >('users/logout', async (_, { getState, dispatch }) => {
   const token = getState().users.user?.token;
-  const response = await axiosApi.delete<LogOutMessage>(routes.login, {
+  await axiosApi.delete<LogOutMessage>(routes.login, {
     headers: { Authorization: 'Bearer ' + token },
   });
   dispatch(unsetUser());
-  return response.data;
 });

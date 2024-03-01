@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from '../../../app/hooks';
-import { selectPosts, selectPostsLoading } from '../postsSlice';
-import { fetchPosts } from '../postsThunks';
-import LoadingPage from '../../../components/IU/LoadingPage/LoadingPage';
-import PostItem from './PostItem';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { selectPosts, selectPostsLoading } from './postsSlice';
+import { fetchPosts } from './postsThunks';
+import LoadingPage from '../../components/IU/LoadingPage/LoadingPage';
+import PostItem from './components/PostItem';
 import { Box, Typography } from '@mui/material';
 
 const AllPosts: React.FC = () => {

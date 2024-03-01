@@ -12,6 +12,7 @@ const Layout: React.FC<React.PropsWithChildren> = ({ children }) => {
         borderRight: '1px solid #eee',
         height: '100vh',
         position: 'relative',
+        overflowY: 'scroll',
       }}
     >
       <header

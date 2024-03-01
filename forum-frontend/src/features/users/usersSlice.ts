@@ -12,7 +12,6 @@ interface UsersState {
   loginLoading: boolean;
   loginError: GlobalError | null;
   logOutLoading: boolean;
-  logOutMessage: string | null;
 }
 
 const initialState: UsersState = {
@@ -24,7 +23,6 @@ const initialState: UsersState = {
   loginLoading: false,
   loginError: null,
   logOutLoading: false,
-  logOutMessage: null,
 };
 
 export const usersSlice = createSlice({
@@ -76,9 +74,8 @@ export const usersSlice = createSlice({
       .addCase(logOutUser.pending, (state) => {
         state.logOutLoading = true;
       })
-      .addCase(logOutUser.fulfilled, (state, { payload: response }) => {
+      .addCase(logOutUser.fulfilled, (state) => {
         state.logOutLoading = false;
-        state.logOutMessage = response.message;
       })
       .addCase(logOutUser.rejected, (state) => {
         state.logOutLoading = false;
@@ -88,6 +85,7 @@ export const usersSlice = createSlice({
 
 export const usersReducer = usersSlice.reducer;
 export const { unsetUser, resetMessages } = usersSlice.actions;
+
 export const selectUser = (state: RootState) => state.users.user;
 export const selectRegisterMessage = (state: RootState) =>
   state.users.registerMessage;
@@ -101,7 +99,6 @@ export const selectLoginMessage = (state: RootState) =>
 export const selectLoginLoading = (state: RootState) =>
   state.users.loginLoading;
 export const selectLoginError = (state: RootState) => state.users.loginError;
+
 export const selectLogOutLoading = (state: RootState) =>
   state.users.logOutLoading;
-export const selectLogOutMessage = (state: RootState) =>
-  state.users.logOutMessage;

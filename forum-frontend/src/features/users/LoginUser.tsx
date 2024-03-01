@@ -9,7 +9,7 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 import { LockOpen } from '@mui/icons-material';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import {
@@ -22,9 +22,9 @@ import { LoadingButton } from '@mui/lab';
 import { loginUser } from './usersThunks';
 import ErrorAlert from '../../components/IU/Alerts/ErrorAlert';
 import SuccessAlert from '../../components/IU/Alerts/SuccessAlert';
+import SuccessFormItem from '../../components/IU/FormItem/SuccessFormItem';
 
 const Login: React.FC = () => {
-  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const error = useAppSelector(selectLoginError);
   const loading = useAppSelector(selectLoginLoading);
@@ -46,17 +46,74 @@ const Login: React.FC = () => {
     });
   };
 
-  const navigateToHome = () => {
-    setTimeout(() => {
-      navigate('/');
-    }, 1000);
-  };
   const submitFormHandler = async (event: React.FormEvent) => {
     event.preventDefault();
 
     await dispatch(loginUser(state)).unwrap();
-    navigateToHome();
   };
+
+  let formField: React.ReactNode;
+
+  if (loginMessage) {
+    formField = (
+      <Grid container justifyContent="center" direction="column" gap={2}>
+        <Grid item>
+          <SuccessAlert message={loginMessage} />
+        </Grid>
+        <Grid item textAlign="center">
+          <SuccessFormItem />
+        </Grid>
+      </Grid>
+    );
+  } else {
+    formField = (
+      <Box component="form" onSubmit={submitFormHandler} sx={{ mt: 3 }}>
+        <Grid container spacing={2}>
+          <Grid item xs={12}>
+            <TextField
+              fullWidth
+              label="Username"
+              name="username"
+              value={state.username}
+              onChange={inputChangeHandler}
+              autoComplete="current-username"
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              fullWidth
+              name="password"
+              label="Password"
+              type="password"
+              value={state.password}
+              onChange={inputChangeHandler}
+              autoComplete="current-password"
+            />
+          </Grid>
+        </Grid>
+        <Grid item xs={12} textAlign="center">
+          <LoadingButton
+            type="submit"
+            loading={loading}
+            color={'info'}
+            disableElevation
+            sx={{ mt: 3, mb: 2, py: 1 }}
+            disabled={loading}
+            variant="contained"
+          >
+            Sign In
+          </LoadingButton>
+        </Grid>
+        <Grid container justifyContent="center">
+          <Grid item>
+            <Link component={RouterLink} to="/register" variant="body2">
+              New user? Sign Up
+            </Link>
+          </Grid>
+        </Grid>
+      </Box>
+    );
+  }
 
   return (
     <Container component="main" maxWidth="xs">
@@ -77,52 +134,7 @@ const Login: React.FC = () => {
 
         {error && <ErrorAlert message={error.error} />}
 
-        {loginMessage && <SuccessAlert message={loginMessage} />}
-        <Box component="form" onSubmit={submitFormHandler} sx={{ mt: 3 }}>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <TextField
-                fullWidth
-                label="Username"
-                name="username"
-                value={state.username}
-                onChange={inputChangeHandler}
-                autoComplete="current-username"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                value={state.password}
-                onChange={inputChangeHandler}
-                autoComplete="current-password"
-              />
-            </Grid>
-          </Grid>
-          <Grid item xs={12} textAlign="center">
-            <LoadingButton
-              type="submit"
-              loading={loading}
-              color={'info'}
-              disableElevation
-              sx={{ mt: 3, mb: 2, py: 1 }}
-              disabled={loading}
-              variant="contained"
-            >
-              Sign In
-            </LoadingButton>
-          </Grid>
-          <Grid container justifyContent="center">
-            <Grid item>
-              <Link component={RouterLink} to="/register" variant="body2">
-                New user? Sign Up
-              </Link>
-            </Grid>
-          </Grid>
-        </Box>
+        {formField}
       </Box>
     </Container>
   );
